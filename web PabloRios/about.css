@@ -1,0 +1,428 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    background-color: #333;
+    /* Fondo oscuro uniforme */
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Pantalla de carga */
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+/* Logo */
+.logo {
+    width: 60px;
+    height: auto;
+}
+
+/* Animación de giro del logo */
+.logo-spin {
+    animation: spin 1.5s ease-out;
+}
+
+/* Animación para deslizar el logo hacia abajo */
+.logo-slide-out {
+    animation: slideOut 0.8s ease-out forwards;
+}
+
+.pr {
+    color: rgb(68, 68, 68);
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+}
+
+aside nav ul {
+    list-style-type: none;
+    /* Elimina los puntos predeterminados */
+    padding-left: 0;
+    /* Elimina cualquier relleno izquierdo de la lista */
+}
+
+/* Efectos en los enlaces y el menú */
+aside nav ul li a {
+    text-decoration: none;
+    color: #cccccc;
+    font-size: 1.4em;
+    padding: 10px 20px;
+    display: block;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+/* Aseguramos que el índice no quede pegado a la derecha */
+aside {
+    padding-right: 20px;
+    /* Añadimos un padding a la derecha para evitar que el índice se quede pegado */
+}
+
+/* Efecto hover en los enlaces */
+aside nav ul li a:hover {
+    background-color: #444444;
+    color: #ffffff;
+}
+
+/* Sección Sobre Mí */
+.sobre-mi {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    background-color: #444;
+    color: #ffffff;
+    padding: 50px;
+    border-radius: 15px;
+    margin: 20px auto;
+    /* Reducción del margen superior para acercar la sección a la parte superior */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-out;
+}
+
+.sobre-mi:hover {
+    transform: translateY(-5px);
+    /* Efecto sutil al pasar el ratón */
+}
+
+/* Contenedor de texto */
+.sobre-mi .contenido {
+    flex: 1;
+    padding-right: 40px;
+    text-align: center;
+}
+
+/* Título */
+.sobre-mi h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #e0e0e0;
+    text-transform: uppercase;
+}
+
+/* Texto */
+.sobre-mi p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: #cccccc;
+    font-size: 1.1em;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Contenedor de la foto */
+.sobre-mi .foto-perfil {
+    flex: 0 0 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* Imagen de perfil */
+.sobre-mi .foto-perfil img {
+    max-width: 100%;
+    border-radius: 7%;
+
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.sobre-mi .foto-perfil img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Animaciones */
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(100vh);
+    }
+}
+
+/* Pie de página */
+footer {
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    width: 100%;
+    z-index: 2;
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.social-footer {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.social-footer a {
+    color: rgb(75, 75, 75);
+    font-size: 1.5rem;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-footer a:hover {
+    color: #ffffff;
+    transform: scale(1.1);
+}
+
+
+@media (max-width: 1024px) {
+    .container {
+        flex-direction: column;
+        /* Cambiar la dirección del flex para que el contenido y el menú estén en una columna */
+    }
+
+    aside {
+        padding-right: 0;
+        padding-left: 20px;
+        /* Asegurar que el índice no se quede pegado al borde */
+        width: 100%;
+        /* Hacer que el aside ocupe todo el ancho */
+    }
+
+    .sobre-mi {
+        padding: 30px;
+        /* Reducir el padding de la sección */
+        flex-direction: column;
+        align-items: center;
+        margin: 20px auto;
+    }
+
+    .sobre-mi .contenido {
+        padding-right: 0;
+        text-align: center;
+        /* Centrar el texto */
+    }
+
+    .sobre-mi h2 {
+        font-size: 2rem;
+        /* Reducir el tamaño del título en pantallas pequeñas */
+        margin-bottom: 10px;
+    }
+
+    .sobre-mi p {
+        font-size: 1rem;
+        max-width: 90%;
+        /* Hacer que el texto ocupe más espacio */
+        margin: 10px auto;
+    }
+
+    .sobre-mi .foto-perfil {
+        flex: 0 0 80%;
+        margin-top: 20px;
+    }
+
+    .sobre-mi .foto-perfil img {
+        max-width: 90%;
+        /* Reducir el tamaño de la imagen */
+    }
+}
+.btn-about {
+    display: inline-block;
+    padding: 12px 30px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: white;
+    background-color: #333333;
+    text-decoration: none;
+    border-radius: 25px;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-about:hover {
+    background-color: #5c5c5c; /* Cambiar color en hover */
+    transform: scale(1.05); /* Efecto de zoom */
+}
+
+.btn-about:active {
+    transform: scale(1); /* Efecto de activación */
+    background-color: #151616;
+}
+
+/* Estilos para dispositivos móviles (ancho máximo de 600px) */
+@media (max-width: 600px) {
+
+    /* Ajustes en la barra lateral */
+    aside {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .container {
+        padding: 10px;
+        /* Reducir padding en el contenedor */
+    }
+
+    /* Hacer que el texto en el pie de página se vea bien en móviles */
+    footer p {
+        font-size: 0.8rem;
+    }
+
+    .social-footer a {
+        font-size: 1.2rem;
+        /* Reducir el tamaño de los iconos sociales */
+    }
+
+    /* Ajustar la imagen de perfil */
+    .sobre-mi .foto-perfil img {
+        width: 100%;
+        /* Hacer que la imagen de perfil ocupe el 100% en móviles */
+        max-width: 300px;
+        /* Limitar el tamaño máximo de la imagen */
+    }
+
+    /* Mejorar la visualización de los párrafos en móviles */
+    .sobre-mi p {
+        font-size: 0.9rem;
+        max-width: 100%;
+        /* Ajustar el texto para que ocupe todo el espacio disponible */
+    }
+
+    /* Ajustar la altura del logo */
+    .logo {
+        width: 50px;
+        height: auto;
+    }
+
+    /* Mejorar la visibilidad del menú */
+    aside nav ul li a {
+        font-size: 1.2em;
+        /* Reducir tamaño de los enlaces del menú */
+        padding: 10px;
+    }
+
+    /* Añadir margen a las redes sociales en el pie de página */
+    .social-footer {
+        gap: 10px;
+    }
+}
+
+/* Ajustes de la galería en dispositivos pequeños */
+@media (max-width: 768px) {
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
+        /* Mostrar 2 columnas en lugar de 4 */
+        gap: 10px;
+        /* Reducir el espacio entre las imágenes */
+    }
+}
+
+/* Ajustes de la galería en dispositivos muy pequeños */
+@media (max-width: 480px) {
+    .gallery {
+        grid-template-columns: 1fr;
+        /* Mostrar una sola columna en dispositivos muy pequeños */
+    }   
+
+    .image img {
+        border-radius: 5%;
+        /* Redondear las imágenes un poco más en pantallas pequeñas */
+    }
+}
+
+
+/*----------------------IA------------------------*/
+button {
+    background-color: #4CAF50;
+    /* Color de fondo verde */
+    color: white;
+    /* Texto blanco */
+    font-size: 16px;
+    /* Tamaño de fuente */
+    padding: 12px 24px;
+    /* Espaciado interno (alto y ancho) */
+    border: none;
+    /* Sin borde */
+    border-radius: 25px;
+    /* Bordes redondeados */
+    cursor: pointer;
+    /* Cambia el cursor al pasar sobre el botón */
+    transition: all 0.3s ease;
+    /* Transición suave para efectos hover */
+    font-weight: bold;
+    /* Negrita */
+    text-align: center;
+    /* Centra el texto dentro del botón */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Sombra sutil */
+}
+
+/* Efecto cuando el usuario pasa el ratón sobre el botón */
+button:hover {
+    background-color: #45a049;
+    /* Color de fondo más oscuro al pasar el ratón */
+    transform: translateY(-2px);
+    /* Eleva el botón ligeramente */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    /* Sombra más grande */
+}
+
+/* Efecto cuando el botón es presionado */
+button:active {
+    background-color: #388e3c;
+    /* Cambio de color cuando se presiona */
+    transform: translateY(2px);
+    /* Botón se hunde ligeramente */
+    box-shadow: none;
+    /* Elimina la sombra */
+}
+
+/* Estilo de los iconos (si los incluyes) */
+button i {
+    margin-right: 8px;
+    /* Espacio entre el icono y el texto */
+}
+
+/*------------------------------------------------*/
+

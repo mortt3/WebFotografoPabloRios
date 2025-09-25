@@ -1,0 +1,1380 @@
+/* Pantalla de carga mejorada */
+.pantalla-carga {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 10000;
+    overflow: hidden;
+}
+
+.pantalla-carga .imagenes {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+.pantalla-carga .imagenes img {
+    position: absolute;
+    width: 200px;
+    height: auto;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 1s ease;
+    object-fit: cover;
+}
+
+/* Animaciones para cada imagen */
+.pantalla-carga .imagenes img:nth-child(1) { 
+    top: 10%; 
+    left: 15%; 
+    transform: rotate(-10deg); 
+    animation: aparecer 1s forwards 1s, 
+               moverIzquierda 2s forwards 6s; 
+}
+.pantalla-carga .imagenes img:nth-child(2) { 
+    top: 30%; 
+    left: 50%; 
+    transform: rotate(5deg); 
+    animation: aparecer 1s forwards 2s, 
+               moverIzquierda 2s forwards 6s; 
+}
+.pantalla-carga .imagenes img:nth-child(3) { 
+    top: 60%; 
+    left: 20%; 
+    transform: rotate(-15deg); 
+    animation: aparecer 1s forwards 3s, 
+               moverIzquierda 2s forwards 6s; 
+}
+.pantalla-carga .imagenes img:nth-child(4) { 
+    top: 40%; 
+    left: 75%; 
+    transform: rotate(8deg); 
+    animation: aparecer 1s forwards 4s, 
+               moverIzquierda 2s forwards 6s; 
+}
+.pantalla-carga .imagenes img:nth-child(5) { 
+    top: 70%; 
+    left: 55%; 
+    transform: rotate(-5deg); 
+    animation: aparecer 1s forwards 5s, 
+               moverIzquierda 2s forwards 6s; 
+}
+
+@keyframes aparecer {
+    to {
+        opacity: 0.8;
+        transform: scale(1) rotate(var(--rotation));
+    }
+}
+
+@keyframes moverIzquierda {
+    to {
+        transform: translateX(-100vw) rotate(var(--rotation));
+    }
+}
+
+.pantalla-carga .texto {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    line-height: 1;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    animation: moverTexto 2s forwards 4s, 
+               fadeOut 0.5s forwards 6s;
+}
+
+@keyframes moverTexto {
+    to {
+        transform: translateX(20px);
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+    }
+}
+
+/* Animación para deslizar todo a la izquierda */
+@keyframes deslizarPantalla {
+    to {
+        transform: translateX(-100vw);
+    }
+}
+
+.ocultar-pantalla {
+    animation: deslizarPantalla 1s forwards;
+}
+/* Posiciones aleatorias de las imágenes */
+.pantalla-carga .imagenes img:nth-child(1) { top: 10%; left: 15%; transform: rotate(-10deg); }
+.pantalla-carga .imagenes img:nth-child(2) { top: 30%; left: 50%; transform: rotate(5deg); }
+.pantalla-carga .imagenes img:nth-child(3) { top: 60%; left: 20%; transform: rotate(-15deg); }
+.pantalla-carga .imagenes img:nth-child(4) { top: 40%; left: 75%; transform: rotate(8deg); }
+.pantalla-carga .imagenes img:nth-child(5) { top: 70%; left: 55%; transform: rotate(-5deg); }
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden; /* Evita el scroll horizontal */
+    background-color: aliceblue;
+    font-family: Arial, sans-serif;
+    color: white;
+}
+html, body {
+    width: 100%;
+}
+/* Galería Profesional */
+.galeria {
+    padding: 80px 10%;
+    position: relative;
+    overflow: hidden;
+    color: white;
+    isolation: isolate; /* Contiene los efectos dentro del elemento */
+    position: relative;
+}
+.galeria-click-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Cambiado a 1 para estar sobre el fondo pero bajo el contenido */
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23ffffff" d="M8 5v14l11-7z"/></svg>') 12 12, pointer;
+    opacity: 0; /* Invisible pero clickeable */
+    transition: opacity 0.3s;
+}
+
+.galeria:hover .galeria-click-area {
+    opacity: 0.3; /* Muestra un overlay al hacer hover */
+    background: rgba(255,255,255,0.1);
+}
+
+
+.galeria::before {
+    content: "";
+    position: absolute;
+    top: -10px; /* Extiende más allá del contenedor */
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background-image: url('img/IMG/23_FondoAbajo.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: blur(6px) brightness(0.5);
+    z-index: -1;
+}
+
+/* Capa oscura para mejorar el contraste */
+.galeria::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: -1;
+}
+/* Contenedor principal */
+.grid-thumbnails {
+    position: relative;
+}
+
+/* Cuadrícula de miniaturas */
+.thumbnail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+    grid-template-rows: repeat(2, 1fr);    /* 2 filas */
+    gap: 3px;
+    width: 100%;
+    height: 100%;
+}
+
+/* Para 9 imágenes (3x3) */
+.thumbnail-grid.nine {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+
+.thumbnail-grid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+/* Efecto hover */
+.grid-thumbnails:hover .thumbnail-grid img {
+    transform: scale(0.95);
+}
+
+.grid-thumbnails:hover .image-info {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Mantén tus estilos existentes para .image-info */
+
+/* Asegura que el contenido de la galería esté por encima */
+.masonry-gallery {
+    position: relative;
+    z-index: 2;
+}
+
+.masonry-gallery {
+    columns: 3;
+    column-gap: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.masonry-item {
+    display: inline-block;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    break-inside: avoid;
+    background: #252525;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.masonry-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.6s ease;
+    filter: grayscale(20%);
+}
+
+.masonry-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.masonry-item:hover img {
+    transform: scale(1.08);
+    filter: grayscale(0%);
+}
+
+.image-info {
+    position: absolute;
+    bottom: -100%;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    color: white;
+    padding: 0;
+    transition: all 0.5s ease;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+}
+
+.masonry-item:hover .image-info {
+    bottom: 0;
+}
+
+.info-content {
+    padding: 2rem;
+    width: 100%;
+}
+
+.image-info h3 {
+    margin: 0 0 10px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.image-info p {
+    margin: 0 0 15px;
+    font-size: 1rem;
+    opacity: 0.9;
+    color: #f0f0f0;
+}
+
+.image-meta {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+    font-size: 0.85rem;
+    color: #ccc;
+}
+
+.image-meta i {
+    margin-right: 5px;
+    color: #aaa;
+}
+
+/* Botón mejorado */
+.gallery-cta {
+    text-align: center;
+    margin-top: 60px;
+    position: relative;
+    z-index: 1;
+}
+
+.gallery-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 15px 35px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(45deg, #3a3a3a, #1e1e1e);
+    text-decoration: none;
+    border-radius: 50px;
+    transition: all 0.4s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.gallery-button i {
+    margin-left: 10px;
+    transition: transform 0.3s ease;
+}
+
+.gallery-button:hover {
+    background: linear-gradient(45deg, #4a4a4a, #2e2e2e);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.gallery-button:hover i {
+    transform: translateX(5px);
+}
+
+/* Efectos de luz */
+.galeria::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%);
+    z-index: 0;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .masonry-gallery {
+        columns: 2;
+        column-gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .galeria {
+        padding: 60px 5%;
+    }
+    
+    .masonry-gallery {
+        columns: 1;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    
+    .gallery-button {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+}
+/* Ajustar todos los elementos para respetar el ancho de la pantalla */
+* {
+    box-sizing: border-box;
+}
+
+/* Ocultar la barra de desplazamiento */
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* Estilo del encabezado */
+header {
+    background-color: rgba(0, 0, 0, 0.274);
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    padding-bottom: 1%;
+    padding-top: 0.5%;
+    padding-left: 0.5%;
+}
+.nosub{
+    text-decoration: none; 
+    color: white;
+
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+}
+
+
+.pr{
+    color: rgb(68, 68, 68);
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+
+
+}
+
+/* Navegación */
+nav {
+    flex-grow: 1;
+    text-align: center;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+nav ul li {
+    padding: 15px 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #3b3b3b;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    left: 0;
+    bottom: -5px;
+    background-color: white;
+    transition: width 0.3s ease;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+/* Estilo del banner */
+.banner {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.deslizar {
+    display: flex;
+    animation: deslizar 60s infinite;
+    width: 100%;
+    height: 100%;
+}
+
+.img {
+    min-width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+/* sobremi */
+#sobre-mi {
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo semitransparente */
+    background-image: url('img/IMG/24_FondoAbajo.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 50px;  /* Espaciado interno */
+    min-height: 500px;  /* Altura mínima para evitar solapamientos */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 1;
+  }
+
+
+/* Fondo */
+
+.fondo {
+    width: 100%;
+    padding-top: 4%;
+    padding-bottom: 4%;
+    background-image:url("img/IMG/24_FondoAbajo.jpg") ;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 0;
+    background-color: rgba(0, 0, 0, 0.705);
+}
+
+.cambio1 {
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.247), rgba(0, 0, 0, 0.301)), url("img/IMG/23_FondoAbajo.jpg");
+}
+
+.contenido {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.493);
+    max-width: 80%;
+    padding-top: 2%;
+    padding-bottom: 5% ;
+    border-radius: 2%;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.contenido.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+.contenido img {
+    width: 23vw; /* Ajusta la imagen a un 20% del ancho de la ventana */
+    height: auto;
+    margin-bottom: 20px;
+}
+
+/* Galería */
+.galeria {
+    padding: 5%;
+    text-align: center;
+    color: black;
+}
+
+.galeria h1 {
+    font-style: italic;
+    font-weight: 700;
+    font-size: 2em;
+    margin-bottom: 5%;
+}
+
+.grid-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5%;
+}
+
+.gallery-item {
+    flex: 1 1 45%;
+    max-width: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.grid-gallery img {
+    width: 80%;
+    height: auto;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.grid-gallery img:hover {
+    transform: scale(1.05);
+    cursor: crosshair;
+}
+ 
+
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-content {
+    max-width: 90%;
+    max-height: 90%;
+    margin: auto;
+    display: block;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #353535;
+}
+/* boton de ver galeria */
+.ver-galeria {
+    text-align: center;
+    background-color: rgba(34, 34, 34, 0.705);
+    padding-bottom: 2%;
+}
+
+.gallery-button {
+    display: inline-block;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+    background-color: #313233;
+    text-decoration: none;
+    border-radius: 25px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-button:hover {
+    background-color: #474849;
+    transform: translateY(-5px);
+}
+
+.gallery-button:active {
+    transform: translateY(0);
+    background-color: #17191a;
+}
+/* Sección de contacto */
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.2rem;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 15px 20px;
+    border-radius: 10px;
+    width: fit-content;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.info-item i {
+    font-size: 1.5rem;
+    color: #09a9f3;
+}
+
+.social-links {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.social-links a {
+    color: white;
+    font-size: 2rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 50%;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.social-links a:hover {
+    background-color: rgb(3, 3, 3);
+    transform: scale(1.2);
+}
+
+.social-links a i {
+    display: block;
+}
+
+/* Pie de página */
+footer {
+    background-color: rgb(34, 34, 34); /* Fondo oscuro */
+    color: white; /* Texto blanco para alto contraste */
+    text-align: center; /* Centra el contenido horizontalmente */
+    padding: 20px 0; /* Espaciado interno para separación */
+    width: 100%; /* Asegura que ocupe todo el ancho */
+    z-index: 2; /* Prioridad sobre otros elementos */
+    position: relative; 
+}
+
+footer p {
+    margin: 0; /* Elimina márgenes innecesarios */
+    font-size: 0.9rem; /* Tamaño de texto pequeño pero legible */
+}
+
+.social-footer {
+    margin-top: 10px; /* Separación entre el texto y los iconos */
+    display: flex; /* Alinea los elementos en fila */
+    justify-content: center; /* Centra los iconos horizontalmente */
+    gap: 15px; /* Espaciado entre iconos */
+    flex-direction: row; 
+}
+
+.social-footer a {
+    color: rgb(75, 75, 75); /* Color inicial del icono */
+    font-size: 1.5rem; /* Tamaño adecuado para visibilidad */
+    transition: transform 0.3s ease, color 0.3s ease; /* Efectos suaves */
+}
+
+.social-footer a:hover {
+    color: #ffffff; /* Color blanco al pasar el ratón */
+    transform: scale(1.1); /* Aumenta ligeramente el tamaño del icono */
+}
+
+/* Animaciones */
+.banner {
+    overflow: hidden;
+    width: 100%; /* Ajusta al tamaño de la pantalla */
+}
+
+.deslizar {
+    display: flex;
+    animation: deslizar 20s linear infinite; /* Animación de deslizamiento */
+}
+
+.img {
+    width: 100%; /* Cada imagen toma todo el ancho del contenedor */
+}
+
+.banner {
+    overflow: hidden;
+    width: 100%; /* Ajusta al tamaño de la pantalla */
+}
+
+.deslizar {
+    display: flex;
+    animation: deslizar 50s linear infinite; /* Animación más lenta (50s para todo el ciclo) */
+}
+
+.img {
+    width: 100%; /* Cada imagen toma todo el ancho del contenedor */
+}
+
+/* Animación de deslizamiento */
+@keyframes deslizar {
+    0%, 10% { transform: translateX(0); }      /* Muestra la primera imagen */
+    20%, 30% { transform: translateX(-100%); } /* Muestra la segunda imagen */
+    40%, 50% { transform: translateX(-200%); } /* Muestra la tercera imagen */
+    60%, 70% { transform: translateX(-300%); } /* Muestra la cuarta imagen */
+    80%, 90% { transform: translateX(-400%); } /* Muestra la quinta imagen */
+    100% { transform: translateX(-500%); } /* Vuelve al inicio sin rebote */
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+/* Estilo de la descripción */
+.descripcion {
+    font-family: 'Poppins', sans-serif; /* Cambiamos la fuente */
+    font-size: 1.2rem;
+    line-height: 1.6;
+    text-align: center;
+    color: #f0f0f0;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Sombra de texto para más profundidad */
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 0 10%;
+}
+
+/* Estilo del botón */
+.btn-about {
+    display: inline-block;
+    padding: 12px 30px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: white;
+    background-color: #333333;
+    text-decoration: none;
+    border-radius: 25px;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-about:hover {
+    background-color: #5c5c5c; /* Cambiar color en hover */
+    transform: scale(1.05); /* Efecto de zoom */
+}
+
+.btn-about:active {
+    transform: scale(1); /* Efecto de activación */
+    background-color: #151616;
+}
+
+/* Estilos generales para pantallas más pequeñas (tablets y móviles) */
+@media (max-width: 1024px) {
+/* Header */
+header {
+    padding: 10px 15px; /* Añadir padding cómodo */
+    flex-direction: column; /* Organizar el encabezado en columna */
+    align-items: center; /* Centrar los elementos */
+    position: relative;
+    z-index: 10;
+}
+
+.logo {
+    width: 50px; /* Reducir tamaño de la imagen del logo */
+}
+
+nav ul {
+    flex-direction: column; /* Los elementos de la navegación en columna */
+    padding: 0;
+    gap: 15px; /* Mejorar el espaciado entre los elementos */
+    margin-top: 10px;
+    align-items: center;
+}
+
+nav ul li {
+    padding: 10px 0; /* Reducir padding de los elementos */
+}
+
+nav ul li a {
+    font-size: 1.2rem;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    text-transform: uppercase; /* Hacer el texto en mayúsculas */
+    border-bottom: 2px solid transparent;
+    transition: color 0.3s, border-color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #2c2c2c; /* Mejorar el color del hover */
+    border-bottom: 2px solid #2c2c2c;
+}
+
+
+/* Banner */
+.banner {
+    height: 60vh; /* Reducir la altura del banner en pantallas pequeñas */
+    overflow: hidden;
+}
+
+.deslizar {
+    display: flex;
+    animation: deslizar 40s linear infinite; /* Animación continua */
+    height: 100%;
+}
+
+.img {
+    object-fit: cover; /* Evitar que las imágenes se recorten */
+    width: 100%; /* Hacer que ocupe todo el ancho */
+    height: 100%;
+}
+
+/* Fondo */
+.fondo {
+    padding-top: 5%; /* Reducir padding superior */
+    padding-bottom: 5%;
+    background-color: rgba(34, 34, 34, 0.75); /* Fondo más oscuro para las secciones */
+    text-align: center; /* Centrar todo el contenido */
+}
+
+.contenido {
+    width: 80%;
+    padding: 20px;
+    margin: 0 auto;
+    background-color: rgba(56, 56, 56, 0.7);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.contenido img {
+    width: 60%; /* Ajustar tamaño de la imagen */
+    margin-bottom: 20px;
+}
+
+.descripcion {
+    font-size: 1rem; /* Reducir el tamaño de la descripción */
+    line-height: 1.5;
+}
+
+.btn-about {
+    font-size: 1rem; /* Ajustar tamaño del botón */
+    padding: 12px 24px;
+    text-transform: uppercase;
+}
+
+/* Galería */
+.grid-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Usar 2 columnas en tablets */
+    gap: 20px;
+}
+
+.gallery-item {
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid-gallery img {
+    width: 100%;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.grid-gallery img:hover {
+    transform: scale(1.05); /* Efecto hover mejorado */
+}
+
+.gallery-button {
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: #313233;
+    color: white;
+    border-radius: 25px;
+    font-size: 1rem;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.gallery-button:hover {
+    background-color: #474849;
+    transform: translateY(-5px);
+}
+
+.gallery-button:active {
+    transform: translateY(0);
+    background-color: #17191a;
+}
+
+/* Sección de contacto */
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.info-item {
+    width: 90%;
+    padding: 15px;
+    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.info-item i {
+    font-size: 1.5rem;
+    color: #09a9f3;
+}
+
+.social-links {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.social-links a {
+    color: white;
+    font-size: 2rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 50%;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.social-links a:hover {
+    background-color: rgb(3, 3, 3);
+    transform: scale(1.2);
+}
+
+/* Pie de página */
+footer p {
+    font-size: 0.8rem; /* Reducir tamaño de texto en footer */
+}
+
+.social-footer {
+    gap: 10px;
+}
+
+.social-footer a {
+    font-size: 1.2rem;
+    padding: 10px;
+}
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+    .descripcion {
+        font-size: 1.1rem; /* Ajustar ligeramente el tamaño del texto */
+    }
+
+    .grid-gallery {
+        gap: 8%; /* Más espacio entre imágenes en tablets */
+    }
+
+    .gallery-item {
+        flex: 1 1 40%; /* Cambia el tamaño de las imágenes para que se ajusten mejor */
+    }
+
+    .fondo {
+        height: auto; /* Ajusta la altura de las secciones */
+        padding-top: 3%;
+        padding-bottom: 3%;
+    }
+    .galeria {
+        padding: 0;
+        margin: 0;
+    }
+
+}
+
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 600px) {
+header {
+    padding: 10px 5px;
+}
+
+nav ul {
+    flex-direction: column;
+    gap: 10px;
+}
+
+nav ul li {
+    padding: 8px 10px;
+}
+
+.banner {
+    height: 50vh; /* Reducir aún más la altura del banner */
+}
+
+.deslizar {
+    animation: deslizar 30s infinite; /* Ajustar la velocidad de la animación */
+}
+
+.img {
+    object-fit: cover; /* Mantener proporción sin recortes */
+}
+
+.descripcion {
+    font-size: 0.8rem; /* Reducir tamaño del texto */
+    line-height: 1.4; /* Ajustar el espacio entre líneas */
+    text-align: justify; /* Cambiar alineación */
+}
+
+.fondo {
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+.contenido {
+    width: 90%;
+    padding: 15px;
+}
+
+ /* Reducir tamaño de la imagen */
+ .contenido img {
+    width: 50%; /* Ajustar al 50% del ancho */
+    margin-bottom: 10px; /* Reducir margen inferior */
+}
+
+/* Ajustar los botones */
+.contenido button, .contenido .btn-about {
+    font-size: 0.8rem; /* Reducir el tamaño del texto */
+    padding: 8px 15px; /* Reducir el padding */
+}
+
+/* Organizar botones en fila */
+.contenido {
+    display: flex;
+    flex-direction: column; /* Organizar contenido principal en columna */
+    align-items: center;
+}
+
+.contenido .btn-about,
+.contenido button {
+    display: inline-block;
+    margin: 5px; /* Separar botones con margen */
+    width: auto; /* Ajustar ancho automáticamente */
+}
+
+.contenido .botonera {
+    display: flex;
+    flex-direction: row; /* Botones en fila */
+    justify-content: center;
+    gap: 10px; /* Espacio entre los botones */
+    margin-top: 10px;
+}
+
+.grid-gallery {
+    grid-template-columns: 1fr; /* Solo 1 imagen por fila */
+}
+
+.gallery-button {
+    font-size: 1rem;
+    padding: 10px 18px;
+}
+
+.contact-info {
+    flex-direction: column;
+    gap: 10px;
+}
+
+.info-item {
+    width: 90%;
+    font-size: 0.9rem;
+}
+
+footer p {
+    font-size: 0.75rem;
+}
+
+.social-footer {
+    gap: 10px;
+}
+
+.social-footer a {
+    font-size: 1rem;
+}
+.info-item span {
+    font-size: 14px; /* Tamaño de texto más pequeño en pantallas móviles */
+}
+
+
+}
+
+@media (max-width: 480px) {
+    /* General */
+    body {
+        font-size: 14px; /* Tamaño base del texto más pequeño */
+        padding: 10px;
+    }
+
+    header {
+        flex-direction: column; /* Header apilado */
+        align-items: center;
+        padding: 10px 5px;
+    }
+
+    .logo {
+        width: 50px; /* Tamaño reducido del logo */
+        margin-bottom: 10px;
+    }
+
+    nav ul {
+        flex-direction: column; /* Menú vertical */
+        gap: 10px;
+        text-align: center;
+    }
+
+    nav ul li {
+        margin: 5px 0;
+    }
+
+    nav ul li a {
+        font-size: 1rem; /* Ajuste del tamaño del texto */
+        padding: 10px 0;
+        border-bottom: 2px solid transparent;
+    }
+
+    nav ul li a:hover {
+        border-bottom: 2px solid #363636; /* Subrayado al pasar el cursor */
+    }
+
+    .banner {
+        height: 40vh; /* Reducir altura del banner */
+        overflow: hidden;
+    }
+
+    .img {
+        object-fit: cover; /* Mantener proporción sin recortes */
+        width: 100%; /* Usar todo el ancho */
+    }
+
+    /* Sección Sobre Mí */
+    .fondo {
+        padding: 5%;
+    }
+
+    .contenido {
+        width: 95%;
+        padding: 1%;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .contenido img {
+        width: 70%; /* Imagen más pequeña */
+        margin-bottom: 15px;
+    }
+
+    .descripcion {
+        font-size: 0.9rem; /* Texto más compacto */
+        line-height: 1.4;
+        text-align: justify; /* Justificar texto */
+    }
+
+    .btn-about {
+        font-size: 0.9rem;
+        padding: 10px 20px;
+    }
+
+    /* Galería */
+    .grid-gallery {
+        grid-template-columns: 1fr; /* Solo una columna */
+        gap: 15px; /* Espaciado uniforme */
+    }
+
+    .gallery-item img {
+        width: 90%; /* Imagenes más pequeñas */
+    }
+
+    .gallery-button {
+        font-size: 1rem;
+        padding: 10px 15px;
+    }
+
+    /* Contacto */
+    .info-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .info-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        font-size: 1px; 
+    }
+
+    /* Footer */
+    footer {
+        padding: 10px 5px;
+    }
+
+    footer p {
+        font-size: 0.75rem;
+    }
+
+    .social-footer {
+        gap: 10px;
+    }
+
+    .social-footer a {
+        font-size: 1rem;
+        padding: 8px;
+    }
+}
+
+
+/*----------------------IA------------------------*/
+button {
+background-color: #2b2c2b; /* Color de fondo verde */
+color: white; /* Texto blanco */
+font-size: 16px; /* Tamaño de fuente */
+padding: 12px 24px; /* Espaciado interno (alto y ancho) */
+border: none; /* Sin borde */
+border-radius: 25px; /* Bordes redondeados */
+cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+transition: all 0.3s ease; /* Transición suave para efectos hover */
+font-weight: bold; /* Negrita */
+text-align: center; /* Centra el texto dentro del botón */
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+/* Efecto cuando el usuario pasa el ratón sobre el botón */
+button:hover {
+background-color: #2a2b2a; /* Color de fondo más oscuro al pasar el ratón */
+transform: translateY(-2px); /* Eleva el botón ligeramente */
+box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra más grande */
+}
+
+/* Efecto cuando el botón es presionado */
+button:active {
+background-color: #2f302f; /* Cambio de color cuando se presiona */
+transform: translateY(2px); /* Botón se hunde ligeramente */
+box-shadow: none; /* Elimina la sombra */
+}
+
+/* Estilo de los iconos (si los incluyes) */
+button i {
+margin-right: 8px; /* Espacio entre el icono y el texto */
+}
+/*--------------------DALTONICOS----------------------------*/
+.accesibilidad {
+    margin: 10px 0;
+    text-align: center;
+}
+
+.accesibilidad button {
+    margin: 3px;
+    padding: 8px 15px;
+    background-color: #666; /* Color de fondo gris oscuro */
+    color: #fff; /* Texto blanco */
+    border: 1px solid #555; /* Borde gris oscuro */
+    border-radius: 3px; /* Bordes menos redondeados */
+    cursor: pointer;
+    font-size: 0.9rem; /* Reducimos el tamaño del texto */
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.accesibilidad button:hover {
+    background-color: #777; /* Un gris un poco más claro al pasar el ratón */
+    transform: translateY(-1px); /* Eleva el botón ligeramente */
+}
+
+.accesibilidad button:active {
+    background-color: #555; /* Gris más oscuro al hacer clic */
+    transform: translateY(0); /* Vuelve a su posición original al hacer clic */
+}

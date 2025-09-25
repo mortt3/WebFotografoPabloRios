@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto</title>
+    <link rel="stylesheet" href="contacto.css">
+    <link rel="icon" href="img/camara.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="preloader" id="preloader">
+        <img src="img/PrLogo.png" alt="Logo" class="logo" id="logo">
+    </div>
+
+    <div class="container">
+        <aside>
+            <a href="index.html" class="pr">
+                <img src="img/PrLogo.png" alt="Logo" class="logo">
+                <span class="nombre">Pablo Rios</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="about.html">Sobre mí</a></li>
+                    <li class="dropdown"><a href="galeria.html">Galería</a></li>
+                    <li><a href="contacto.html" >Hablame</a></li>
+                    <li><a href="index.html#3" >Contactame</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <section class="contact-form">
+            <h1>Contacta conmigo</h1>
+            <form id="miFormulario" action="#" method="post">
+                <div class="form-group">
+                    <label for="name">Nombre:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Correo electrónico:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Mensaje:</label>
+                    <textarea id="message" name="message" rows="6" required></textarea>
+                </div>
+                <button type="button" id="enviarBtn">Enviar</button>
+            </form>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>© 2024 Pablo Rios. Todos los derechos reservados.</p>
+        <div class="social-footer">
+            <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.twitter.com/" target="_blank" aria-label="Twitter">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://www.facebook.com/" target="_blank" aria-label="Facebook">
+                <i class="fab fa-facebook"></i>
+            </a>
+        </div>
+    </footer>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const preloader = document.getElementById("preloader");
+            const logo = document.getElementById("logo");
+
+            logo.classList.add("logo-spin");
+
+            logo.addEventListener("animationend", function (event) {
+                if (event.animationName === "spin") {
+                    logo.classList.add("logo-slide-out");
+                    setTimeout(() => {
+                        preloader.style.display = "none";
+                    }, 800);
+                }
+            });
+
+            // Seleccionamos el formulario y el botón
+            const formulario = document.getElementById('miFormulario');
+            const enviarBtn = document.getElementById('enviarBtn');
+
+            // Función para validar el formulario
+            function validarFormulario() {
+                // Chequea si el formulario es válido
+                if (formulario.checkValidity()) {
+                    // Cambia el texto del botón a "Enviado"
+                    enviarBtn.textContent = 'Enviado';
+                    
+                    // Deshabilita el botón para que no se pueda pulsar de nuevo
+                    enviarBtn.disabled = true;
+                    
+                    // Cambia el color del botón a verde
+                    enviarBtn.style.backgroundColor = '#4CAF50'; // Verde
+                    enviarBtn.style.color = 'white'; // Texto blanco
+                } else {
+                    // Si el formulario no es válido, muestra un mensaje de error
+                    alert('Por favor, completa todos los campos correctamente.');
+                }
+            }
+
+            // Añade un evento click al botón
+            enviarBtn.addEventListener('click', validarFormulario);
+        });
+    </script>
+</body>
+
+</html>

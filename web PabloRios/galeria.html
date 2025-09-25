@@ -1,0 +1,236 @@
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Galería</title>
+        <link rel="stylesheet" href="galeria.css">
+        <link rel="icon" href="img/camara.ico">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    </head>
+    <body>
+        <div class="preloader" id="preloader">
+            <img src="img/PrLogo.png" alt="Logo" class="logo" id="logo">
+        </div>
+    
+        <!-- Botón para abrir el menú en dispositivos móviles y tablets -->
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    
+        <div class="container">
+            <aside>
+                <a href="index.html" class="pr">
+                    <img src="img/PrLogo.png" alt="Logo" class="logo">
+                    <span class="nombre">Pablo Rios</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="about.html">Sobre mí</a></li>
+                        <li class="dropdown">
+                            <a class="dropbtn">Galería</a>
+                            <ul class="dropdown-content">
+                                <li> <a href="galeria.html" class="dropbtn">Galería</a>
+                                <li><a href="arquitectura.html">Arquitectura</a></li>
+                                <li><a href="paisaje.html">Paisaje</a></li>
+                                <li><a href="luces.html">Luces</a></li>
+                                <li><a href="retrato.html">Retrato</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="contacto.html">Hablame</a></li>
+                        <li><a href="index.html#3">Contactame</a></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <section class="gallery">
+                <div class="image" onclick="openModal(0)">
+                    <img src="img/IMG/01_RIOS_P.jpg" alt="Retrato a otro fotografo" 
+                    title="Retrato a otro fotografo. Foto por Pablo Ríos." loading="lazy" data-author="Pablo Ríos" data-source="Portafolio personal">
+                </div>
+                <div class="image" onclick="openModal(1)">
+                    <img src="img/IMG/02_RIOS_P.jpg" alt="Retrato despistado" 
+                    title="Retrato despistado. Foto por Pablo Ríos." data-author="Pablo Ríos" loading="lazy" data-source="Portafolio personal">
+                </div>
+                <div class="image" onclick="openModal(2)">
+                    <img src="img/IMG/03_RIOS_P.jpg" alt="Retrato de pareja paseando al perro" 
+                    title="Retrato de pareja paseando al perro. Foto por Pablo Ríos." data-author="Pablo Ríos" loading="lazy" data-source="Portafolio personal">
+                </div>
+                <div class="image" onclick="openModal(3)">
+                    <img src="img/IMG/11_RIOS_P.jpg" alt="Retrato en el cementerio" 
+                    title="Retrato en el cementerio. Foto por Pablo Ríos." data-author="Pablo Ríos"  loading="lazy" data-source="Portafolio personal">z
+                </div>
+                <div class="image" onclick="openModal(4)">
+                    <img src="img/IMG/12_RIOS_P.jpg" alt="Retrato en el cementerio despistado" 
+                    title="Retrato en el cementerio despistado. Foto por Pablo Ríos." data-author="Pablo Ríos" loading="lazy" data-source="Portafolio personal">
+                </div>
+                <div class="image" onclick="openModal(5)">
+                    <img src="img/IMG/13_RIOS_P.jpg" alt="Retrato en el cementerio bajando escaleras" 
+                    title="Retrato en el cementerio bajando escaleras. Foto por Pablo Ríos." data-author="Pablo Ríos" loading="lazy" data-source="Portafolio personal">
+                </div>
+                <div class="image" onclick="openModal(6)">
+                    <img src="img/IMG/14_RIOS_P.jpg" alt="Foto estatua tras un arbol" 
+                    title="Foto estatua tras un arbol. Foto por Pablo Ríos." data-author="Pablo Ríos" loading="lazy" data-source="Portafolio personal">
+                </div>
+                <div class="image" onclick="openModal(7)">
+                    <img src="img/IMG/18_RIOS_P.jpg" alt="foto tumba con peluches" 
+                    title="foto tumba con peluches. Foto por Pablo Ríos." data-author="Pablo Ríos" loading="lazy" data-source="Portafolio personal">
+                </div>
+                <div class="image" onclick="openModal(8)">
+                    <img src="img/IMG/19_RIOS_P.jpg" alt="foto tumba" 
+                    title="foto tumba. Foto por Pablo Ríos." data-author="Pablo Ríos" loading="lazy" data-source="Portafolio personal">
+                </div>
+                <div class="image" onclick="openModal(9)">
+                    <img src="img/IMG/20_RIOS_P.jpg" alt="foto tumba con una estatua" 
+                    title="foto tumba con una estatua. Foto por Pablo Ríos." data-author="Pablo Ríos" loading="lazy" data-source="Portafolio personal">
+                </div>
+                <div class="image" onclick="openModal(10)">
+                    <img src="img/IMG/07_RIOS_P.jpg" alt="Foto a la plaza de toros" 
+                    title="Foto a la plaza de toros. Foto por Pablo Ríos." data-author="Pablo Ríos" loading="lazy" data-source="Portafolio personal">
+                </div>
+                <div class="image" onclick="openModal(11)">
+                    <img src="img/IMG/08_RIOS_P.jpg" alt="Foto al edificio banca de plaza san roque" 
+                    title="Foto al edificio banca de plaza san roque. Foto por Pablo Ríos." data-author="Pablo Ríos" loading="lazy" data-source="Portafolio personal">
+                </div>
+                <div class="image" onclick="openModal(12)">
+                    <img src="img/IMG/10_RIOS_P.jpg" alt="Foto a la torre" 
+                    title="Foto a la torre. Foto por Pablo Ríos." data-author="Pablo Ríos" loading="lazy" data-source="Portafolio personal">
+                </div>
+                <div class="image" onclick="openModal(13)">
+                    <img src="img/IMG/04_RIOS_P.jpg" alt="foto edificio hotel " 
+                    title="foto edificio hotel . Foto por Pablo Ríos." data-author="Pablo Ríos" loading="lazy" data-source="Portafolio personal">
+                </div>
+                <div class="image" onclick="openModal(14)">
+                    <img src="img/IMG/05_RIOS_P.jpg" alt="foto edificio ibercaja " 
+                    title="foto edificio ibercaja. Foto por Pablo Ríos." data-author="Pablo Ríos" loading="lazy" data-source="Portafolio personal">
+                </div>
+                <div class="image" onclick="openModal(15)">
+                    <img src="img/IMG/06_RIOS_P.jpg" alt="Luz de frente y la persona mirando al frente"
+                 title="Luz de frente y la persona mirando al frente. Foto por Pablo Ríos." data-author="Pablo Ríos" loading="lazy" data-source="Portafolio personal">
+                </div>
+                <div class="image" onclick="openModal(16)">
+                    <img src="img/IMG/09_RIOS_P.jpg" alt="Luz de frente y la persona mirando al frente"
+                    title="Luz de frente y la persona mirando al frente. Foto por Pablo Ríos." data-author="Pablo Ríos" loading="lazy" data-source="Portafolio personal">
+                </div>
+                <div class="image" onclick="openModal(17)">
+                    <img src="img/IMG/17_RIOS_P.jpg" alt="Foto de la siluita de una persona" 
+                    title="Foto de la siluita de una persona. Foto por Pablo Ríos." data-author="Pablo Ríos" loading="lazy" data-source="Portafolio personal">
+                </div>
+                <div class="image" onclick="openModal(18)">
+                    <img src="img/IMG/15_RIOS_P.jpg" aalt="Foto de la siluita de una persona con luz" 
+                    title="Foto de la siluita de una persona con luz. Foto por Pablo Ríos." data-author="Pablo Ríos" loading="lazy" data-source="Portafolio personal">
+                </div>
+                <div class="image" onclick="openModal(19)">
+                    <img src="img/IMG/16_RIOS_P.jpg" alt="Retrato de estudio" 
+                    title="Retrato de estudio. Foto por Pablo Ríos." data-author="Pablo Ríos" loading="lazy" data-source="Portafolio personal">
+                </div>
+                <div class="image" onclick="openModal(20)">
+                    <img src="img/IMG/21_RIOS_P.jpg" alt="Luz desde la izquierda y la persona de esplaldas a ella"
+                    title="Luz desde la izquierda y la persona de esplaldas a ella. Foto por Pablo Ríos."  loading="lazy" data-author="Pablo Ríos" data-source="Portafolio personal">
+                </div>
+                <div class="image" onclick="openModal(21)">
+                    <img src="img/IMG/22_RIOS_P.jpg" alt="Luz de lateral izquierod y una persona mirando a la luz" 
+                    title="Luz de lateral izquierod y una persona mirando a la luz. Foto por Pablo Ríos."loading="lazy"  data-author="Pablo Ríos" data-source="Portafolio personal">
+                </div>
+            </section>
+        </div>
+
+        <!-- Modal para las imágenes -->
+        <div id="modal" class="modal">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img class="modal-content" id="modalImage">
+            <a class="prev" onclick="changeImage(-1)">&#10094;</a>
+            <a class="next" onclick="changeImage(1)">&#10095;</a>
+        </div>
+
+        <footer>
+            <p>© 2024 Pablo Rios. Todos los derechos reservados.</p>
+            <div class="social-footer">
+                <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.twitter.com/" target="_blank" aria-label="Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://www.facebook.com/" target="_blank" aria-label="Facebook">
+                    <i class="fab fa-facebook"></i>
+                </a>
+            </div>
+        </footer>
+    
+        <!-- Script incluido dentro del HTML -->
+        <script>
+            let currentImageIndex = 0;
+            let images = document.querySelectorAll(".gallery .image img");
+            let modal = document.getElementById("modal");
+            let modalImage = document.getElementById("modalImage");
+
+            function openModal(index) {
+                currentImageIndex = index;
+                modal.style.display = "block";
+                modalImage.src = images[index].src;
+            }
+
+            function closeModal() {
+                modal.style.display = "none";
+            }
+
+            function changeImage(direction) {
+                currentImageIndex += direction;
+                if (currentImageIndex < 0)  currentImageIndex = images.length - 1;
+                else if (currentImageIndex >= images.length) currentImageIndex = 0;
+                modalImage.src = images[currentImageIndex].src;
+            }
+
+            document.addEventListener('keydown', function(event) {
+                if (event.key === "ArrowLeft") changeImage(-1);
+                else if (event.key === "ArrowRight") changeImage(1); 
+                else if (event.key === "Escape") closeModal();
+            });
+
+            document.addEventListener("DOMContentLoaded", function () {
+                const preloader = document.getElementById("preloader");
+                const logo = document.getElementById("logo");
+                const content = document.querySelector(".content");
+
+                // Paso 1: Iniciar la animación de giro del logo
+                logo.classList.add("logo-spin");
+
+                // Paso 2: Esperar a que termine el giro y luego deslizar el logo hacia abajo
+                logo.addEventListener("animationend", function (event) {
+                if (event.animationName === "spin") {
+                    // Añadir animación de deslizamiento hacia abajo
+                    logo.classList.add("logo-slide-out");
+
+                    // Paso 3: Cuando el logo termine de deslizarse, mostrar el contenido
+                    setTimeout(() => {
+                        preloader.style.display = "none"; // Ocultar el preloader
+                        content.classList.add("visible"); // Mostrar el contenido de la página
+                    }, 800); // Tiempo para la animación de deslizamiento
+            }
+        });
+    });
+
+    function toggleMenu() {
+        document.body.classList.toggle('menu-open');
+    }
+
+
+      // Abrir/cerrar el menú lateral
+      function toggleMenu() {
+            document.body.classList.toggle('menu-open');
+        }
+
+        // Abrir/cerrar el submenú de Galería
+        function toggleDropdown() {
+            const dropdownContent = document.querySelector('.dropdown-content');
+            dropdownContent.style.display = (dropdownContent.style.display === 'block') ? 'none' : 'block';
+
+            // Cambiar el icono de "V" a "▲" dependiendo del estado
+            const toggleIcon = document.querySelector('.toggle-icon');
+            toggleIcon.textContent = (dropdownContent.style.display === 'block') ? '▲' : '▼';
+        }
+
+        
+        </script>
+
+    </body>
+    </html>

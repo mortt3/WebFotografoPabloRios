@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Mí</title>
+    <link rel="stylesheet" href="about.css">
+    <link rel="icon" href="img/camara.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        /* Contenedor del muñeco */
+        #muñeco {
+            position: relative;  /* Cambiado de 'fixed' a 'relative' */
+            width: 300px;
+            height: 300px;
+            display: none;  /* Oculto por defecto */
+            margin: 1% auto 0 auto; /* Centrado y espaciado desde el botón */
+            background: url('img/Talking-Photo-unscreen.gif') no-repeat center center;
+            background-size: contain;
+            text-align: center; /* Asegura que el contenido del muñeco esté centrado */
+        }
+
+        /* Botón para leer en voz alta */
+        #botonLeer {
+            margin: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Pantalla de carga -->
+    <div class="preloader" id="preloader">
+        <img src="img/PrLogo.png" alt="Logo" class="logo" id="logo">
+    </div>
+
+    <div class="container">
+        <aside>
+            <a href="index.html" class="pr">
+                <img src="img/PrLogo.png" alt="Logo" class="logo">
+                <span class="nombre">Pablo Rios</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="galeria.html" class="dropbtn">Galería</a></li>
+                    <li><a href="contacto.html">Hablame</a></li>
+                    <li><a href="index.html#3">Contactame</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Sección de contenido "Sobre Mí" -->
+        <section class="sobre-mi">
+            <div class="contenido">
+                <h2>Sobre Mí</h2>
+                <p id="texto-sobre-mi">
+                    ¡Hola! Soy Pablo Ríos, un apasionado fotógrafo con años de experiencia capturando momentos
+                    inolvidables. Mi enfoque se centra en la fotografía artística y documental, siempre buscando esa
+                    chispa única que hace cada imagen especial. A través de mi lente, trato de contar historias
+                    auténticas, jugando con la luz, las sombras y las emociones.
+                    <br><br>
+                    La fotografía es mi forma de expresión, y cada proyecto es una nueva aventura. He trabajado en una
+                    variedad de entornos, desde sesiones íntimas hasta grandes eventos, pero siempre con el mismo
+                    propósito: capturar la esencia del momento.
+                    <br><br>
+                    Si quieres conocer más sobre mi trabajo o colaborar en un proyecto, ¡no dudes en ponerte en contacto
+                    conmigo!
+                </p>
+                <button onclick="leerTexto()"  class="btn-about" id="botonLeer">Leer en voz alta</button>
+                <div id="muñeco"></div>
+                <a href="curriculum.html" class="btn-about">Mi curriculum</a>
+            </div>
+            <div class="foto-perfil">
+                <img src="img/PabloRios_perfil.jpg" alt="Foto de Pablo Ríos">
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2024 Pablo Rios. Todos los derechos reservados.</p>
+        <div class="social-footer">
+            <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.twitter.com/" target="_blank" aria-label="Twitter">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://www.facebook.com/" target="_blank" aria-label="Facebook">
+                <i class="fab fa-facebook"></i>
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        // Asegurarse de que el DOM esté completamente cargado
+        document.addEventListener("DOMContentLoaded", function () {
+            const logo = document.getElementById("logo");
+            const preloader = document.getElementById("preloader");
+
+            // Iniciar la animación de giro del logo
+            logo.classList.add("logo-spin");
+
+            // Esperar a que termine el giro y luego deslizar el logo hacia abajo
+            logo.addEventListener("animationend", function (event) {
+                if (event.animationName === "spin") {
+                    logo.classList.add("logo-slide-out");
+
+                    // Ocultar el preloader después de la animación
+                    setTimeout(() => {
+                        preloader.style.display = "none";
+                    }, 800);
+                }
+            });
+        });
+
+        // Variable para controlar la síntesis
+        let lecturaEnCurso = false;
+        let utterance = null;
+
+        function leerTexto() {
+            const boton = document.getElementById("botonLeer");
+            const muñeco = document.getElementById("muñeco");
+
+            if ('speechSynthesis' in window) {
+                if (speechSynthesis.speaking) {
+                    // Detener la lectura
+                    speechSynthesis.cancel();
+                    boton.textContent = "Leer en voz alta";
+                    muñeco.style.display = "none";
+                } else {
+                    // Iniciar la lectura
+                    const texto = document.getElementById("texto-sobre-mi").textContent;
+                    const utterance = new SpeechSynthesisUtterance(texto);
+                    utterance.lang = 'es-ES';
+
+                    // Buscar una voz masculina
+                    const vocesDisponibles = speechSynthesis.getVoices();
+                    const vozMasculina = vocesDisponibles.find(
+                        voz => voz.name === "Microsoft Pablo Desktop" || voz.name === "Google español"
+                    );
+
+                    if (vozMasculina) {
+                        utterance.voice = vozMasculina; // Asignar voz masculina
+                    } else {
+                        console.warn("No se encontró una voz masculina en español. Usando la voz predeterminada.");
+                    }
+
+                    // Mostrar el muñeco al iniciar
+                    utterance.onstart = () => {
+                        muñeco.style.display = "block";
+                        boton.textContent = "Detener lectura";
+                    };
+
+                    // Ocultar el muñeco al terminar
+                    utterance.onend = () => {
+                        muñeco.style.display = "none";
+                        boton.textContent = "Leer en voz alta";
+                    };
+
+                    // Comenzar la lectura
+                    speechSynthesis.speak(utterance);
+                }
+            } else {
+                alert("La API SpeechSynthesis no está soportada en este navegador.");
+            }
+        }
+    </script>
+</body>
+</html>

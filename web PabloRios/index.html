@@ -1,0 +1,446 @@
+    <html lang="es">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Portafolio</title>
+        <link rel="icon" href="img/camara.ico">
+        <link rel="stylesheet" href="css.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+        <style>
+            /* Contenedor del muñeco */
+            #muñeco {
+                position: fixed;
+                bottom: 0px;
+                right: 0px;
+                width: 300px;
+                height: 300px;
+                display: none;
+                /* Oculto por defecto */
+                background: url('img/Talking-Photo-unscreen.gif') no-repeat center center;
+                background-size: contain;
+            }
+
+            /* Botón para leer en voz alta */
+            #botonLeer {
+                margin: 20px;
+                padding: 10px 20px;
+                font-size: 16px;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+
+    <body>
+         <!-- Pantalla de carga -->
+       
+          
+            <div class="pantalla-carga" id="pantallaCarga">
+                <div class="imagenes">
+                    <img src="img/IMG/01_RIOS_P.jpg" alt="Fotografía 1" style="--rotation: -10deg">
+                    <img src="img/IMG/08_RIOS_P.jpg" alt="Fotografía 2" style="--rotation: 5deg">
+                    <img src="img/IMG/05_RIOS_P.jpg" alt="Fotografía 3" style="--rotation: -15deg">
+                    <img src="img/IMG/14_RIOS_P.jpg" alt="Fotografía 4" style="--rotation: 8deg">
+                    <img src="img/IMG/22_RIOS_P.jpg" alt="Fotografía 5" style="--rotation: -5deg">
+                </div>
+                <div class="texto">
+                    PABLO<br>RIOS<br>FOTOGRAFO
+                </div>
+            </div>
+        
+          
+        <!-- Filtros SVG para accesibilidad -->
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display: none;">
+            <filter id="protanopia">
+                <feColorMatrix type="matrix" values="0.567, 0.433, 0, 0, 0
+                                                0.558, 0.442, 0, 0, 0
+                                                0, 0.242, 0.758, 0, 0
+                                                0, 0, 0, 1, 0" />
+            </filter>
+            <filter id="deuteranopia">
+                <feColorMatrix type="matrix" values="0.625, 0.375, 0, 0, 0
+                                                0.7, 0.3, 0, 0, 0
+                                                0, 0.3, 0.7, 0, 0
+                                                0, 0, 0, 1, 0" />
+            </filter>
+            <filter id="tritanopia">
+                <feColorMatrix type="matrix" values="0.95, 0.05, 0, 0, 0
+                                                0, 0.433, 0.567, 0, 0
+                                                0, 0.475, 0.525, 0, 0
+                                                0, 0, 0, 1, 0" />
+            </filter>
+        </svg>
+        <!-- Contenido de la página -->
+        <header>
+            <div class="menu">
+                <a href="index.html" class="pr">
+                    <img src="img/PrLogo.png" alt="Logo" class="logo">
+                    <span class="nombre">Pablo Rios</span>
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="about.html">Sobre mí</a></li>
+                    <li><a href="galeria.html">Galería</a></li>
+                    <li><a href="#3">Contáctame</a></li>
+                    <li><a href="contacto.html">Hablame</a></li>
+                </ul>
+
+            </nav>
+            <!-- Botones de accesibilidad -->
+            <div class="accesibilidad">
+                <button onclick="aplicarFiltro('normal')">Normal</button>
+                <button onclick="aplicarFiltro('protanopia')">Protanopia</button>
+                <button onclick="aplicarFiltro('deuteranopia')">Deuteranopia</button>
+                <button onclick="aplicarFiltro('tritanopia')">Tritanopia</button>
+            </div>
+        </header>
+
+        <!-- Banner -->
+        <div class="banner">
+            <div class="deslizar">
+                <img class="img" src="img/IMG/22_RIOS_P.jpg" alt="Luz de lateral izquierod y una persona mirando a la luz" >
+                        
+                <img class="img" src="img/IMG/21_RIOS_P.jpg" alt="Luz desde la izquierda y la persona de esplaldas a ella">
+
+                <img class="img" src="img/IMG/09_RIOS_P.jpg" alt="Luz de frente y la persona mirando al frente">
+
+                <img class="img" src="img/IMG/06_RIOS_P.jpg" alt="Luz de frente y la persona mirando al frente">
+
+                <img class="img" src="img/IMG/15_RIOS_P.jpg" alt="Luz de lateral izquierdo una persona pirando a ella " >
+
+                <!-- Repetimos las imágenes al final para crear el efecto de bucle infinito -->
+                <img class="img" src="img/IMG/22_RIOS_P.jpg" alt="Luz de lateral izquierod y una persona mirando a la luz" >
+            </div>
+        </div>
+
+        <!-- Sobre mí -->
+        <div id="1" class="fondo cambio1">
+            <div class="contenido" id="sobreMi">
+                <img src="img/PabloRios_perfil.jpg" alt="Perfil">
+                <h1>Sobre mí</h1>
+                <p class="descripcion" id="texto-sobre-mi">
+                    <b>El objetivo de Pablo es involucrar al espectador en la imagen, no solo capturando un momento,
+                        sino <br> transmitiendo una historia. Su enfoque busca capturar la esencia de cada escena,
+                        jugando con la luz y las sombras para crear imágenes que conecten emocionalmente. <br> Cada
+                        fotografía es una oportunidad para contar una historia única y auténtica.</b>
+                </p>
+                <div class="botonera">
+                    <button onclick="leerTexto()" class="btn-about" id="botonLeer">Leer en voz alta</button>
+                    <div id="muñeco"></div>
+                    <a href="about.html" class="btn-about">Más sobre mí</a>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Galería -->
+        
+    <div id="2" class="galeria">
+        <div class="galeria-click-area" id="galeriaClickArea"></div>
+        <div class="masonry-gallery">
+
+            <a href="paisaje.html" >
+            <div class="masonry-item">
+                <img src="img/IMG/18_RIOS_P.jpg" alt="Cruz con peluches" 
+                    title="Cruz con peluches. Foto por Pablo Ríos." data-author="Pablo Ríos" 
+                    data-source="Portafolio personal">
+                <div class="image-info">
+                    <h3>Paisaje</h3>
+                    <p>Foto por Pablo Ríos</p>
+                </div>
+            </div>
+            </a>
+            <a href="retrato.html" >
+            <div class="masonry-item">
+                <img src="img/21_RIOS_P.jpg" alt="persona de espalda a la luz" 
+                    title="persona de espalda a la luz. Foto por Pablo Ríos." data-author="Pablo Ríos" 
+                    data-source="Portafolio personal">
+                <div class="image-info">
+                    <h3>Retrato</h3>
+                    <p>Foto por Pablo Ríos</p>
+                </div>
+            </div>
+            </a>
+            <a href="arquitectura.html" >
+            <div class="masonry-item">
+                <img src="img/07_RIOS_P.jpg" alt="Plaza de toros"
+                    title="Plaza de toros. Foto por Pablo Ríos." data-author="Pablo Ríos" 
+                    data-source="Portafolio personal">
+                <div class="image-info">
+                    <h3>Arquitectura</h3>
+                    <p>Foto por Pablo Ríos</p>
+                </div>
+            </div>
+            </a>
+            <a href="retrato.html" >
+            <div class="masonry-item">
+                <img src="img/IMG/01_RIOS_P.jpg" alt="Retrato a otro fotografo" 
+                    title="Retrato a otro fotografo. Foto por Pablo Ríos." data-author="Pablo Ríos" 
+                    data-source="Portafolio personal">
+                <div class="image-info">
+                    <h3> Retrato </h3>
+                    <p>Foto por Pablo Ríos</p>
+                </div>
+            </div>
+            </a>
+            <a href="arquitectura.html" >
+            <div class="masonry-item">
+                <img src="img/05_RIOS_P.jpg" alt="Foto de arquitectura Ibercaja"
+                    title="Foto de arquitectura Ibercaja. Foto por Pablo Ríos." data-author="Pablo Ríos" 
+                    data-source="Portafolio personal">
+                <div class="image-info">
+                    <h3>         Arquitectura        </h3>
+                    <p>Foto por Pablo Ríos</p>
+                </div>
+            </div>
+            </a>
+            <div class="masonry-item grid-thumbnails">
+                <a href="galeria.html#arquitectura" class="thumbnail-container">
+                    <!-- Para 4 imágenes (2x2) -->
+                    <div class="thumbnail-grid">
+                        <img src="img/IMG/04_RIOS_P.jpg" alt="Miniatura 1">
+                        <img src="img/IMG/11_RIOS_P.jpg" alt="Miniatura 2">
+                        <img src="img/IMG/14_RIOS_P.jpg" alt="Miniatura 3">
+                        <img src="img/IMG/19_RIOS_P.jpg" alt="Miniatura 4">
+                    </div>  
+                    <div class="image-info">
+                        <h3>VER MAS</h3>
+                       
+                    </div>
+                </a>
+            </div>
+            
+            </div>
+            <!-- Puedes agregar más imágenes aquí -->
+        </div>
+    </div>
+
+        <!-- Sección de contacto -->
+        <div id="3" class="fondo">
+            <div class="contenido" id="contactoSection">
+                <h1>Contáctame</h1>
+                <p> &nbsp;&nbsp;Si tienes alguna consulta o necesitas más información, no dudes en comunicarte conmigo. ¡Estoy a tu
+                    disposición! &nbsp;&nbsp; </p>
+                <div class="contact-info">
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+34 666 666 666</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>pablorios@gmail.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pie de página -->
+        <footer>
+            <p>© 2024 Pablo Rios. Todos los derechos reservados.</p>
+            <div class="social-footer">
+                <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.twitter.com/" target="_blank" aria-label="Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://www.facebook.com/" target="_blank" aria-label="Facebook">
+                    <i class="fab fa-facebook"></i>
+                </a>
+            </div>
+            <br>
+            <a href="mapaweb.html" class="nosub" >mapaweb</a>
+        </footer>
+
+        <script>
+            //--------------------Pantalla de carga---------------------------
+document.addEventListener('DOMContentLoaded', function() {
+    document.body.style.overflow = 'hidden';
+    const pantallaCarga = document.getElementById('pantallaCarga');
+    
+    setTimeout(() => {
+        // Cuando el texto haya desaparecido (6s), deslizar todo a la izquierda
+        pantallaCarga.classList.add('ocultar-pantalla');
+        
+        // Eliminar la pantalla de carga después de la animación
+        setTimeout(() => {
+            pantallaCarga.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }, 1000); // 1 segundo para la animación de deslizar
+    }, 6000); // 6 segundos totales
+});
+    //--------------------IA----------------------------
+    function leerTexto() {
+        const boton = document.getElementById("botonLeer");
+        const muñeco = document.getElementById("muñeco");
+
+        if ('speechSynthesis' in window) {
+            if (speechSynthesis.speaking) {
+                speechSynthesis.cancel();
+                boton.textContent = "Leer en voz alta";
+                muñeco.style.display = "none";
+                return;
+            }
+
+            const texto = document.getElementById("texto-sobre-mi").textContent;
+            const utterance = new SpeechSynthesisUtterance(texto);
+            utterance.lang = 'es-ES'; // Idioma fijo en español de España
+
+            // Seleccionar una voz masculina si está disponible
+            const voces = speechSynthesis.getVoices();
+            if (voces.length > 0) {
+                // Buscar una voz masculina en español
+                let vozMasculina = voces.find(voz => 
+                    voz.lang.includes('es') && 
+                    (voz.name.toLowerCase().includes('male') || 
+                    voz.name.toLowerCase().includes('hombre') ||
+                    voz.name.toLowerCase().includes('man')));
+                
+                // Si no encontramos una voz marcada como masculina, usar la primera en español
+                if (!vozMasculina) {
+                    vozMasculina = voces.find(voz => voz.lang.includes('es'));
+                }
+                
+                // Si no hay voces en español, usar la primera disponible
+                if (!vozMasculina && voces.length > 0) {
+                    vozMasculina = voces[0];
+                }
+                
+                if (vozMasculina) {
+                    utterance.voice = vozMasculina;
+                }
+            }
+
+            // Mostrar el muñeco al iniciar la lectura
+            utterance.onstart = () => {
+                muñeco.style.display = "block";
+                boton.textContent = "Detener lectura";
+            };
+
+            // Ocultar el muñeco al terminar la lectura
+            utterance.onend = () => {
+                muñeco.style.display = "none";
+                boton.textContent = "Leer en voz alta";
+            };
+
+            speechSynthesis.speak(utterance);
+        } else {
+            alert("Tu navegador no soporta la función de lectura en voz alta.");
+        }
+    }
+
+    // Cargar las voces disponibles cuando la página se cargue
+    window.speechSynthesis.onvoiceschanged = function() {
+        // Esta función se mantiene para asegurar que las voces estén cargadas
+        // pero no necesitamos hacer nada más aquí
+    };
+
+    // Cargar voces inmediatamente si ya están disponibles
+    if (speechSynthesis.getVoices().length > 0) {
+        window.speechSynthesis.onvoiceschanged();
+    }
+          
+            //------------DALTONICOS --------------------------------------
+            function aplicarFiltro(tipo) {
+                const body = document.body;
+
+                switch (tipo) {
+                    case 'protanopia':
+                        body.style.filter = "url('#protanopia')";
+                        break;
+                    case 'deuteranopia':
+                        body.style.filter = "url('#deuteranopia')";
+                        break;
+                    case 'tritanopia':
+                        body.style.filter = "url('#tritanopia')";
+                        break;
+                    default:
+                        body.style.filter = "none";
+                        break;
+                }
+            }
+
+            //-----------------------------------
+
+
+
+            // Mostrar la sección de contacto cuando el scroll pase 500px
+            window.addEventListener('scroll', function () {
+                var contacto = document.getElementById("contacto");
+                var scrollPosition = window.scrollY;
+
+                if (scrollPosition > 500) contacto.style.display = "block";
+                else contacto.style.display = "none";
+            });
+
+            function toggleMenu() {
+                document.body.classList.toggle('menu-open');
+            }
+
+            //--------------------------------------------------
+            // Obtener el modal
+            var modal = document.getElementById("imageModal");
+            var modalImg = document.getElementById("modalImg");
+            var span = document.getElementsByClassName("close")[0];
+
+            // Obtener todas las imágenes en la galería
+            var images = document.querySelectorAll('.grid-gallery img');
+
+            images.forEach(function (image) {
+                image.onclick = function () {
+                    modal.style.display = "block"; // Mostrar el modal
+                    modalImg.src = this.src; // Establecer la fuente de la imagen en el modal
+                }
+            });
+
+            // Al hacer clic en el botón de cerrar, ocultar el modal
+            span.onclick = function () {
+                modal.style.display = "none";
+            }
+
+            window.onclick = function (event) {
+                if (event.target == modal) modal.style.display = "none";
+            }
+
+            window.addEventListener('keydown', function (event) {
+                if (event.key === "Escape") modal.style.display = "none";
+            });
+
+            // Mostrar la sección de contacto cuando el scroll pase 500px
+            window.addEventListener('scroll', function () {
+                var contacto = document.getElementById("contacto");
+                var scrollPosition = window.scrollY;
+
+                if (scrollPosition > 500) contacto.style.display = "block";
+                else contacto.style.display = "none";
+
+            });
+
+            function toggleMenu() {
+                document.body.classList.toggle('menu-open');
+            }
+            // Reemplaza el código del modal con este:
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const galeriaSection = document.querySelector('.galeria');
+    
+    galeriaSection.addEventListener('click', function(e) {
+        // Verifica si el clic fue en un área vacía (no en una imagen o contenido)
+        if (e.target === this || e.target.classList.contains('galeria-click-area')) {
+            console.log("Redirigiendo a galería..."); // Depuración
+            window.location.href = 'galeria.html';
+        }
+    });
+});
+
+
+        </script>
+
+
+
+
+    </body>
+
+    </html>

@@ -1,0 +1,299 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #333;
+    color: #554f4f;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    display: flex;
+    flex: 1
+}
+
+aside {
+    padding: 30px;
+    color: #ffffff;
+    min-width: 250px;
+}
+
+.logo {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.pr {
+    color: rgb(68, 68, 68);
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+}
+
+aside nav ul {
+    list-style: none;
+    margin-top: 20px;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+aside nav ul li {
+    margin: 15px 0;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+aside nav ul li a {
+    text-decoration: none;
+    color: #cccccc;
+    font-weight: bold;
+    font-size: 1.1em;
+    padding: 10px 15px;
+    display: block;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 8px;
+}
+
+aside nav ul li a:hover {
+    background-color: #3b3b3b;
+    color: #ffffff;
+}
+
+.contact-form {
+    padding: 40px;
+    flex: 1;
+}
+
+.contact-form h1 {
+    color: #ffffff;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    color: #cccccc;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    border-radius: 5px;
+    border: none;
+    background-color: #444;
+    color: #ffffff;
+    margin-top: 5px;
+}
+
+button {
+    background-color: #e53935;
+    color: #ffffff;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #cc332b;
+}
+
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+.logo-spin {
+    animation: spin 1.5s ease-out;
+}
+
+.logo-slide-out {
+    animation: slideOut 0.8s ease-out forwards;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes slideOut {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}
+
+
+/* Pie de página */
+footer {
+    background-color: rgb(34, 34, 34);
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    width: 100%;
+    z-index: 2;
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.social-footer {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.social-footer a {
+    color: rgb(75, 75, 75);
+    font-size: 1.5rem;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-footer a:hover {
+    color: #ffffff;
+    transform: scale(1.1);
+}
+
+
+/* Estilos para tablets y dispositivos pequeños (ancho máximo de 1024px) */
+@media (max-width: 1024px) {
+    .container {
+        flex-direction: column; /* Cambiar la disposición a una columna */
+        padding: 10px;
+    }
+
+    aside {
+        width: 100%; /* Hacer que el aside ocupe todo el ancho */
+        padding: 20px; /* Ajustar padding */
+    }
+
+    .contact-form {
+        padding: 20px;
+        width: 100%; /* Asegurar que el formulario ocupe todo el ancho */
+    }
+
+    .contact-form h1 {
+        font-size: 2rem; /* Reducir tamaño del título */
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        font-size: 1em;
+    }
+
+    .form-group input, .form-group textarea {
+        font-size: 1em;
+        padding: 8px;
+    }
+
+    button {
+        font-size: 1.1em; /* Reducir tamaño del botón */
+        padding: 10px;
+    }
+}
+
+/* Estilos para dispositivos móviles (ancho máximo de 600px) */
+@media (max-width: 600px) {
+    .container {
+        padding: 5px; /* Reducir el padding del contenedor */
+    }
+
+    aside {
+        padding: 10px; /* Reducir padding */
+        width: 100%; /* Asegurar que el aside ocupe todo el ancho */
+    }
+
+    .contact-form {
+        padding: 15px;
+        width: 100%; /* Asegurar que el formulario ocupe todo el ancho */
+    }
+
+    .contact-form h1 {
+        font-size: 1.8rem; /* Reducir tamaño del título en pantallas más pequeñas */
+    }
+
+    .form-group label {
+        font-size: 0.9em; /* Reducir tamaño de los labels */
+    }
+
+    .form-group input, .form-group textarea {
+        font-size: 0.9em; /* Reducir tamaño de los campos de entrada */
+        padding: 8px;
+    }
+
+    button {
+        font-size: 1.1em; /* Reducir tamaño del botón */
+        padding: 8px 15px;
+    }
+
+    footer p {
+        font-size: 0.8rem; /* Reducir tamaño del texto del pie de página */
+    }
+
+    .social-footer a {
+        font-size: 1.2rem; /* Reducir el tamaño de los íconos sociales */
+    }
+}
+
+/* Ajustes adicionales para dispositivos más pequeños (menos de 480px) */
+@media (max-width: 480px) {
+    .contact-form h1 {
+        font-size: 1.5rem; /* Reducir aún más el título */
+    }
+
+    .form-group label {
+        font-size: 0.9em;
+    }
+
+    .form-group input, .form-group textarea {
+        font-size: 0.9em;
+        padding: 6px; /* Ajustar el tamaño de los inputs */
+    }
+
+    button {
+        font-size: 1em;
+        padding: 8px 12px; /* Reducir el tamaño del botón */
+    }
+
+    .social-footer a {
+        font-size: 1.2rem; /* Reducir los íconos sociales aún más */
+    }
+}
